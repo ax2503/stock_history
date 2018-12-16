@@ -1,14 +1,23 @@
-#This program will update the current day prices for stocks in 
-#the file current_list.txt
+#This program will update the current day prices.
+
 
 import datetime
-import time
+from datetime import date
 import data_access
 
 
 def main() :
-    price = data_access.getStockprice("CBA")
-    print(str(price))
+  pw = input('Password for MySql Database: ')
+  conn = data_access.getConnection(pw)
+  try:
+    for rows in data_access.getCurrentCodes(conn) :
+      print(rows['stock_code'])
+
+  finally :
+    conn.close()
+
+    
+
 
 
 

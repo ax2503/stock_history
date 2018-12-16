@@ -58,6 +58,18 @@ def replacePriceRecord(conn, entry) :
           entry[1])
   return
 
+def getCurrentCodes(conn) :
+  sql = ('SELECT DISTINCT stock_code FROM year2018 ' +
+    'WHERE trade_date > 20180630;')
+  try:
+    with conn.cursor() as cursor :
+      cursor.execute(sql)
+  except :
+      print('Failed to get current codes')
+  return cursor.fetchall()
+      
+
+
 #Returns a stock price, given an ASX stock code
 def getStockprice(code):
   url = 'https://www.asx.com.au/asx/markets/equityPrices.do?by=asxCodes&asxCodes=' + code
