@@ -13,15 +13,12 @@ def main() :
   conn = data_access.getConnection(pw)
   try:
     for row in data_access.getCurrentCodes(conn) :
-      price = data_access.getStockprice(row['stock_code'])
-      entry =[]
+      prices = data_access.getStockPrices(row['stock_code'])
+      entry=[]
       entry.append(row['stock_code'])
       entry.append(str(today))
-      entry.append(str(price))
-      entry.append(str(price))
-      entry.append(str(price))
-      entry.append(str(price))
-      entry.append('0')
+      for price in prices :
+        entry.append(price)
       print(entry)
       data_access.replacePriceRecord(conn,entry)      
       time.sleep(5)
