@@ -84,3 +84,14 @@ def getStockprice(code):
   else :
     codeprice = 0
   return codeprice
+
+#Returns bid, offer, open, high, low, volume
+def getDayPrices(code) :
+  url = 'https://www.asx.com.au/asx/markets/equityPrices.do?by=asxCodes&asxCodes=' + code
+  r=requests.get(url,allow_redirects = True)
+  open(code+'.html','wb').write(r.content)
+  f = open(code + '.html','r')
+  text = f.read()
+  match = re.findall(r'<td>([0-9,-,\.,%]+)',text)
+
+  return match
