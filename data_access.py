@@ -86,10 +86,13 @@ def getStockPrices(code):
   entry = []
   
   match = re.findall(r'<td>([0-9,-,\.,%]+)',text)
-  for dayprice in match[2:5] :
-    entry.append(dayprice)
-  entry.append(codeprice)
-  entry.append(match[5])
+  if not match :
+    entry = [0,0,0,codeprice,0]
+  else:
+    for dayprice in match[2:5] :
+      entry.append(dayprice)
+    entry.append(codeprice)
+    entry.append(match[5])
   
   return entry
 
