@@ -53,6 +53,7 @@ def replacePriceRecord(conn, entry) :
   try:
     with conn.cursor() as cursor :
       cursor.execute(sql, entry)
+      conn.commit()
   except :
       print('Failed to add record for ' + entry[0] + ' ' +
           entry[1])

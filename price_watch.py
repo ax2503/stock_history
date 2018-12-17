@@ -3,15 +3,29 @@
 
 import datetime
 from datetime import date
+import time
 import data_access
 
 
 def main() :
+  today = date.today()
   pw = input('Password for MySql Database: ')
   conn = data_access.getConnection(pw)
   try:
-    for rows in data_access.getCurrentCodes(conn) :
-      print(rows['stock_code'])
+    for row in data_access.getCurrentCodes(conn) :
+      price = data_access.getStockprice(row['stock_code'])
+      entry =[]
+      entry.append(row['stock_code'])
+      entry.append(str(today))
+      entry.append(str(price))
+      entry.append(str(price))
+      entry.append(str(price))
+      entry.append(str(price))
+      entry.append('0')
+      print(entry)
+      data_access.replacePriceRecord(conn,entry)      
+      time.sleep(5)
+
 
   finally :
     conn.close()
