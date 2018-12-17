@@ -71,8 +71,8 @@ def getCurrentCodes(conn) :
       
 
 
-#Returns a stock price, given an ASX stock code
-def getStockprice(code):
+#Returns a stock prices, given an ASX stock code
+def getStockPrices(code):
   url = 'https://www.asx.com.au/asx/markets/equityPrices.do?by=asxCodes&asxCodes=' + code
   r=requests.get(url,allow_redirects = True)
   open(code+'.html','wb').write(r.content)
@@ -80,18 +80,16 @@ def getStockprice(code):
   text = f.read()
   match = re.search(r'(<td class=\"last\">)(\d+\.\d+)',text)
   if match : 
-    codeprice = float(match.group(2))
+    codeprice = match.group(2)
   else :
     codeprice = 0
-  return codeprice
-
-#Returns bid, offer, open, high, low, volume
-def getDayPrices(code) :
-  url = 'https://www.asx.com.au/asx/markets/equityPrices.do?by=asxCodes&asxCodes=' + code
-  r=requests.get(url,allow_redirects = True)
-  open(code+'.html','wb').write(r.content)
-  f = open(code + '.html','r')
-  text = f.read()
+  entry = []
+  
   match = re.findall(r'<td>([0-9,-,\.,%]+)',text)
+  for dayprice in match[2:5] :
+    entry.append(dayprice)
+  entry.append(codeprice)
+  entry.append(match[5])
+  
+  return entry
 
-  return match
