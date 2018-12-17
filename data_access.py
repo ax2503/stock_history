@@ -72,6 +72,7 @@ def getCurrentCodes(conn) :
 
 
 #Returns a stock prices, given an ASX stock code
+#Open, High, Low, Last, Volume
 def getStockPrices(code):
   url = 'https://www.asx.com.au/asx/markets/equityPrices.do?by=asxCodes&asxCodes=' + code
   r=requests.get(url,allow_redirects = True)
