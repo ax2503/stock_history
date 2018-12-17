@@ -1,0 +1,31 @@
+
+if __name__ == '__main__':
+  main()
+
+
+  start the mysql database in docker. C:\Docker\startmysql.bat
+  price history data is code, open, high, low, close, volume
+
+  REPLACE INTO testtable (field1, field2) VALUES (value1, value2);
+
+  The SELECT ... INTO OUTFILE 'file_name' form of SELECT writes 
+  the selected rows to a file. The file is created on the
+   server host, so you must have the FILE privilege to use this
+    syntax. file_name cannot be an existing file, which among
+     other things prevents files such as /etc/passwd and database
+      tables from being destroyed. The character_set_filesystem 
+      system variable controls the interpretation of the file name.
+
+
+thisyear = date.today().year
+  yearstart = date(int(thisyear), 1,1)
+  if (date.today() - yearstart) < datetime.timedelta(days=30) :
+    thisyear = thisyear - 1
+  print(date.today() - datetime.timedelta(days=30))
+  print(thisyear)
+
+
+got a docker error : failed programming external connectivity on endpoint
+restarted docker. Error went away.
+
+SELECT * FROM year2018 WHERE trade_data = 20181217;
