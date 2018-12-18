@@ -59,6 +59,8 @@ def replacePriceRecord(conn, entry) :
           entry[1])
   return
 
+#Returns a list of the stock codes on the database since start
+#of financial year.
 def getCurrentCodes(conn) :
   sql = ('SELECT DISTINCT stock_code FROM year2018 ' +
     'WHERE trade_date > 20180630;')
@@ -93,7 +95,7 @@ def getStockPrices(code):
     for dayprice in match[2:5] :
       entry.append(dayprice)
     entry.append(codeprice)
-    entry.append(match[5])
+    entry.append(match[5].replace(',',''))
   
   return entry
 
