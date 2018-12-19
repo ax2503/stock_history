@@ -59,6 +59,7 @@ def replacePriceRecord(conn, entry) :
           entry[1])
   return
 
+#Returns one instance of every stockcode. Used as the list of codes to check for price_watch.
 def getCurrentCodes(conn) :
   sql = ('SELECT DISTINCT stock_code FROM year2018 ' +
     'WHERE trade_date > 20180630;')
@@ -68,6 +69,16 @@ def getCurrentCodes(conn) :
   except :
       print('Failed to get current codes')
   return cursor.fetchall()
+
+#Inserts a record of the company name for a given ticker symbol
+def insertStockName(conn,entry) :
+  sql = 'INSERT INTO stocknames (stock_code, stock_name) VALUES(%s,%s);'
+  try:
+    with conn.cursor() as cursor :
+      cursor.execute(sql, entry)
+  except:
+    print('Failed to add record for ' + entry)
+  return 
       
 
 
