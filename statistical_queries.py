@@ -1,9 +1,11 @@
 
 
-def Top20Mover(tradedate, table) :
-    sql = 'SELECT TOP 20 (close - open)/100 FROM ' + table + ' WHERE trade_date = ' + tradedate + ';'
+def TopMovers(tradedate, table, limit) :
+    sql = ('SELECT stock_code, (close - open)/100 as gain FROM ' + table + ' WHERE trade_date = ' + tradedate + 
+        ' ORDER BY gain DESC LIMIT ' + limit + ' ;')
     return sql
 
-def Top20Range(tradedate, table) :
-    sql = 'SELECT TOP 20 (high - low)/100 FROM ' + table + ' WHERE trade_date = ' + tradedate + ';'
+def TopRange(tradedate, table, limit) :
+    sql = ('SELECT stock_code, (high - low)/100 as gain FROM ' + table + ' WHERE trade_date = ' + tradedate + 
+        ' ORDER BY gain DESC LIMIT ' + limit + ' ;')
     return sql
