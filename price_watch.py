@@ -21,7 +21,7 @@ def main() :
         entry.append(price)
       print(entry)
       data_access.replacePriceRecord(conn,entry)      
-      time.sleep(5)
+      time.sleep(4)
 
 
   finally :

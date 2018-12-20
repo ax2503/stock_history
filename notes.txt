@@ -4,6 +4,8 @@ if __name__ == '__main__':
 
 
   start the mysql database in docker. C:\Docker\startmysql.bat
+The docker image of mysql that I am using has secure_file_priv set to NULL. Infile and Outfile not available.
+
   price history data is code, open, high, low, close, volume
 
   REPLACE INTO testtable (field1, field2) VALUES (value1, value2);
