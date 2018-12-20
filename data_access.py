@@ -59,12 +59,9 @@ def replacePriceRecord(conn, entry) :
           entry[1])
   return
 
-<<<<<<< HEAD
+
 #Returns a list of the stock codes on the database since start
 #of financial year.
-=======
-#Returns one instance of every stockcode. Used as the list of codes to check for price_watch.
->>>>>>> a4d1673c916d4e36cfab804da048194ea6f8d4ef
 def getCurrentCodes(conn) :
   sql = ('SELECT DISTINCT stock_code FROM year2018 ' +
     'WHERE trade_date > 20180630;')
