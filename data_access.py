@@ -2,6 +2,7 @@
 import pymysql.cursors
 import requests
 import re
+import statistical_queries as sq
 
 def getConnection(pw) :
   connection=pymysql.connect(host='localhost',
@@ -80,7 +81,23 @@ def insertStockName(conn,entry) :
       cursor.execute(sql, entry)
   except:
     print('Failed to add record for ' + entry)
-  return 
+  return
+
+def getIssueStats(fn,conn, trdate) :
+  sql = fn(trdate)
+  with conn.cursor() as cursor :
+    try :
+      cursor.execute(sql)
+      rcount = cursor.rowcount
+      if rcount > 0 :
+        row = cursor.fetchone()
+        result = row['issues']
+      else:
+        result = 0
+    except :
+      print ('Failed to get stats ')
+      result = 0
+  return result
       
 
 
@@ -89,8 +106,8 @@ def insertStockName(conn,entry) :
 def getStockPrices(code):
   url = 'https://www.asx.com.au/asx/markets/equityPrices.do?by=asxCodes&asxCodes=' + code
   r=requests.get(url,allow_redirects = True)
-  open(code+'.html','wb').write(r.content)
-  f = open(code + '.html','r')
+  open('html/'+ code+'.html','wb').write(r.content)
+  f = open('html/' + code + '.html','r')
   text = f.read()
   match = re.search(r'(<td class=\"last\">)(\d+\.\d+)',text)
   if match : 
