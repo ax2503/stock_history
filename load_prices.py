@@ -24,7 +24,7 @@ def main() :
         year = price_entry[1][:4]
 
         data_access.createPriceTable(conn, 'year' + year)
-        data_access.addPriceRecord(conn, price_entry)
+        data_access.replacePriceRecord(conn, price_entry)
         conn.commit()
         
         
