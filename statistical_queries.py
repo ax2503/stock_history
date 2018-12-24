@@ -20,3 +20,7 @@ def TotalIssuesTraded (tradedate) :
     sql = ('SELECT count(*) as issues FROM ' + 'year' + tradedate[:4] + 
       ' WHERE trade_date = ' + tradedate + ' AND volume !=  0; ')
     return sql
+
+def SelectAll(code, startdate, enddate) :
+    sql = ('(SELECT * FROM MYSQLTABLE WHERE stock_code = \''+ code + '\' AND trade_date BETWEEN ' + startdate + ' AND ' + enddate + ')')
+    return sql

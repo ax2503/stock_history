@@ -124,6 +124,26 @@ def splitYears(startdate, enddate) :
     yearlist.append(str(year))
   return yearlist
 
+def runQuery(fn, conn, code, startdate, enddate) :
+  sql = fn(code, startdate, enddate)
+  years = splitYears(startdate, enddate)
+  query = ''
+  for year in years :
+    query += sql.replace('MYSQLTABLE','year' + year) + (' UNION ' if year != enddate[:4] else ';')
+  with conn.cursor() as cursor :
+    try:
+      cursor.execute(query)
+      rowcount = cursor.rowcount
+      rows = cursor.fetchall()
+    except:
+      print ('Query ' + query + ' failed to execute')
+      rowcount = 0
+      rows = 0
+  return [rowcount, rows]
+
+    
+
+
 
 
 #Returns a stock prices, given an ASX stock code
