@@ -98,6 +98,28 @@ def getIssueStats(fn,conn, trdate) :
       print ('Failed to get stats ')
       result = 0
   return result
+
+#Since the stock_history database has a full year per table, this function is required
+#to generate the date ranges that will be in each year table given a start and end date.
+#Expect that this will be used with UNION select queries.
+def splitDates(startdate, enddate) :
+  if startdate[:4] != enddate[:4] :
+    startyear = startdate[:4]
+    endyear = enddate[:4]
+    dateslist = []
+    for year in range(int(startyear), int(endyear)+1) :
+      if year == int(endyear):
+        dateslist.append((endyear + '0101', enddate))
+      else:
+        dateslist.append((startdate,str(year)+'1231'))
+        startdate = str(year +1) + '0101'
+  else :
+    dateslist = [(startdate, enddate)]
+  return dateslist
+      
+
+
+  return
       
 
 
