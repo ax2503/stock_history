@@ -3,7 +3,6 @@ if __name__ == '__main__':
   main()
 
 
-  start the mysql database in docker. C:\Docker\startmysql.bat
 The docker image of mysql that I am using has secure_file_priv set to NULL. Infile and Outfile not available.
 
   price history data is code, open, high, low, close, volume

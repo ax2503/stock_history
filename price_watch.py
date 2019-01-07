@@ -9,7 +9,7 @@ import data_access
 
 def main() :
   today = date.today()
-  pw = input('Password for MySql Database: ')
+  pw = input('Password for Database: ')
   conn = data_access.getConnection(pw)
   try:
     for row in data_access.getCurrentCodes(conn) :

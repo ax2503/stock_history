@@ -11,7 +11,7 @@ import os
 
 
 def main() :
-  pw = input('Password for MySQL database: ')
+  pw = input('Password for database: ')
   conn = data_access.getConnection(pw)  
   file_list = os.listdir('./data')
   try:
